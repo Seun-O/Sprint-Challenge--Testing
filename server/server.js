@@ -22,4 +22,16 @@ server.get("/api/games", async (req, res) => {
   }
 });
 
+server.post("/api/games", async (req, res) => {
+  try {
+    if (!req.body.title || !req.body.genre) {
+      res.status(402).json("Title and Genre Required");
+    }
+    const data = await db.addGame(req.body);
+    res.status(201).json(data);
+  } catch (err) {
+    // res.status(500).json({ err, message: "Internal Server Error!" });
+  }
+});
+
 module.exports = server;
