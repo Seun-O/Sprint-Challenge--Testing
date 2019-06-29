@@ -31,17 +31,17 @@ describe("POST /api/games/", () => {
   };
 
   //Data is validated in request route which sends 402 Error Message
-  it("should validate required information is provided", async () => {
-    const data = await request(server)
+  it("should validate required information is provided", () => {
+    request(server)
       .post("/api/games")
-      .send();
-    expect(data.status).toBe(402);
+      .send("1")
+      .expect(402);
   });
 
   //Sends status 201 upon creation of new game object
-  it("should return the correct status code", async () => {
+  it("should return the correct status code 201", async () => {
     const data = await request(server)
-      .post("/api/games")
+      .post("/api/games/")
       .send(game);
 
     expect(data.status).toBe(201);

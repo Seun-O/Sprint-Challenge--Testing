@@ -24,15 +24,18 @@ server.get("/api/games", async (req, res) => {
 
 server.post("/api/games", async (req, res) => {
   try {
-    const game = db.getByName(req.body.title);
+    const game = await db.getByName(req.body.title);
     if (!req.body.title || !req.body.genre) {
       res.status(402).json("Title and Genre Required");
+    } else if (game) {
+      res
+        .status(400)
+        .json("Game is already in the system")
+        .end();
+    } else {
+      const data = await db.addGame(req.body);
+      res.status(201).json(data);
     }
-    if (game) {
-      res.status(400).json("Game is already in the system");
-    }
-    const data = await db.addGame(req.body);
-    res.status(201).json(data);
   } catch (err) {
     // res.status(500).json({ err, message: "Internal Server Error!" });
   }
