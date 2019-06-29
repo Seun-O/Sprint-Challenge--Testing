@@ -13,4 +13,13 @@ server.get("/", (req, res) => {
   res.status(200).json("The Server is Alive");
 });
 
+server.get("/api/games", async (req, res) => {
+  try {
+    const data = await db.find();
+    res.status(200).json(data);
+  } catch (err) {
+    res.status(500).json({ err, message: "Internal Server Error!" });
+  }
+});
+
 module.exports = server;

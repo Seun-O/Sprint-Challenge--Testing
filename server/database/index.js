@@ -30,19 +30,26 @@ function addGame(game) {
     .returning("*");
 }
 
-// const execute = async () => {
-//   try {
-//     const data = await find();
-//     console.log(data);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+function delGame(id) {
+  return db("games")
+    .where({ id })
+    .del();
+}
 
-// execute();
+const execute = async () => {
+  try {
+    const data = await find();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+execute();
 
 module.exports = {
   db,
   find,
-  addGame
+  addGame,
+  delGame
 };
