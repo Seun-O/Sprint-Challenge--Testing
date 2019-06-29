@@ -24,8 +24,12 @@ server.get("/api/games", async (req, res) => {
 
 server.post("/api/games", async (req, res) => {
   try {
+    const game = db.getByName(req.body.title);
     if (!req.body.title || !req.body.genre) {
       res.status(402).json("Title and Genre Required");
+    }
+    if (game) {
+      res.status(400).json("Game is already in the system");
     }
     const data = await db.addGame(req.body);
     res.status(201).json(data);

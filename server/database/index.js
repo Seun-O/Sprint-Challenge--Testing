@@ -36,9 +36,15 @@ function delGame(id) {
     .del();
 }
 
+function getByName(name) {
+  return db("games")
+    .where({ title: name })
+    .first();
+}
+
 // const execute = async () => {
 //   try {
-//     const data = await find();
+//     const data = await getByName("Pacman");
 //     console.log(data);
 //   } catch (err) {
 //     console.log(err);
@@ -51,5 +57,6 @@ module.exports = {
   db,
   find,
   addGame,
-  delGame
+  delGame,
+  getByName
 };
