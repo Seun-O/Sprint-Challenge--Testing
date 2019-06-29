@@ -46,6 +46,13 @@ describe("POST /api/games/", () => {
 
     expect(data.status).toBe(201);
   });
+
+  it("should return newly inserted object", async () => {
+    const data = await request(server)
+      .post("/api/games/")
+      .send(game);
+    expect(data.body[0]).toMatchObject(game);
+  });
 });
 
 /**

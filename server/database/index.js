@@ -36,16 +36,16 @@ function delGame(id) {
     .del();
 }
 
-const execute = async () => {
-  try {
-    const data = await find();
-    console.log(data);
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const execute = async () => {
+//   try {
+//     const data = await find();
+//     console.log(data);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
-execute();
+// execute();
 
 module.exports = {
   db,
