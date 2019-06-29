@@ -15,13 +15,19 @@ const config = {
 };
 const db = knex(config);
 
-async function find(id) {
+function find(id) {
   if (id) {
     return db("games")
       .where({ id })
       .first();
   }
   return db("games");
+}
+
+function addGame(game) {
+  return db("games")
+    .insert(game)
+    .returning("*");
 }
 
 // const execute = async () => {
@@ -36,5 +42,7 @@ async function find(id) {
 // execute();
 
 module.exports = {
-  db
+  db,
+  find,
+  addGame
 };
